@@ -1,9 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { MapPin, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
+interface PageProps {
+  params: {
+    id: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
 
 // Project data (same as in projects/page.jsx)
 const projects = [
@@ -150,7 +158,7 @@ const projects = [
   },
 ];
 
-export default function ProjectDetail({ params }: { params: { id: string } }) {
+export default function ProjectDetail({ params }: PageProps) {
   const { id } = params;
   const project = projects.find((p) => p.id === parseInt(id));
   const ref = useRef<HTMLDivElement>(null);
