@@ -1,49 +1,163 @@
-'use client'
-
-import { motion, useInView } from 'framer-motion'
-import { useRef, useState } from 'react'
-import { MapPin, Eye, ExternalLink } from 'lucide-react'
+'use client';
+import { motion, useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { MapPin, Eye, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
 
 const projects = [
   {
     id: 1,
-    title: 'Euphoria Residence',
-    location: 'Victory Park Estate, Lekki, Lagos',
-    description: '5 Bedroom Detached house with BQ featuring indoor/outdoor spatial flow and enchanting entry experience.',
-    image: '/api/placeholder/600/400',
+    title: 'Euphoria Residence I',
+    location: 'Victory Park Estate, Osapa London, Lekki, Lagos',
+    description: 'A luxurious 5-bedroom detached house with BQ, featuring indoor/outdoor spatial flow, enchanting entry experience, and generous outdoor space.',
+    image: '/api/placeholder/600/400?text=Euphoria+Residence+I',
     category: 'Luxury Residential',
     status: 'Completed',
     gradient: 'from-gold via-yellow-400 to-amber-500',
     delay: 0,
+    extendedDescription: 'A one-of-a-kind luxurious 5-bedroom detached house plus a BQ on over 2 floors, located in Victory Park Estate, Lekki, Lagos. Characterized by indoor and outdoor spatial flow, an enchanting entry experience, and generous outdoor space that gives occupants a nice getaway experience. The Euphoria Residence infuses style and comfort with communal living, making it the perfect home for your family.',
+    features: [
+      '5-bedroom detached house with BQ',
+      'Indoor/outdoor spatial flow',
+      'Enchanting entry experience',
+      'Generous outdoor space',
+      'Communal living areas',
+    ],
+    gallery: [
+      '/api/placeholder/1200/800?text=Euphoria+Residence+I+Main',
+      '/api/placeholder/1200/800?text=Euphoria+Residence+I+Interior',
+      '/api/placeholder/1200/800?text=Euphoria+Residence+I+Exterior',
+    ],
   },
   {
     id: 2,
-    title: 'Grace Court Estate',
-    location: 'Kassim Oyofor Street, Ajah, Lagos',
-    description: 'Mini residential development with 23 units of Terrace houses featuring gym, bistro, and recreational areas.',
-    image: '/api/placeholder/600/400',
-    category: 'Estate Development',
-    status: 'Ongoing',
-    gradient: 'from-gray-700 via-gray-800 to-black',
-    delay: 0.2,
+    title: 'Euphoria Residence II',
+    location: 'Victory Park Estate, Osapa London, Lekki, Lagos',
+    description: 'A divine luxury contemporary 5-bedroom detached home with a reflecting pool, gym, cinema, and fully fitted kitchen.',
+    image: '/api/placeholder/600/400?text=Euphoria+Residence+II',
+    category: 'Luxury Residential',
+    status: 'Completed',
+    gradient: 'from-gold via-yellow-400 to-amber-500',
+    delay: 0.6,
+    extendedDescription: 'A divine luxury contemporary 5-bedroom detached home on 2 floors, located in Victory Park Estate, Lekki, Lagos. It boasts a reflecting pool at the ground floor, a fully equipped gym, a cinema, and a fully fitted kitchen. Designed to provide the comforts of peaceful living with modern-style architecture, making it a perfect environment for the lifestyle you deserve.',
+    features: [
+      '5-bedroom detached house',
+      'Reflecting pool on ground floor',
+      'Fully equipped gym',
+      'Private cinema',
+      'Fully fitted kitchen',
+      'Modern-style architecture',
+    ],
+    gallery: [
+      '/api/placeholder/1200/800?text=Euphoria+Residence+II+Main',
+      '/api/placeholder/1200/800?text=Euphoria+Residence+II+Pool',
+      '/api/placeholder/1200/800?text=Euphoria+Residence+II+Gym',
+    ],
   },
   {
     id: 3,
-    title: 'NT Apartments',
+    title: 'NT Apartments I',
     location: 'Thomas Estate, Ajah, Lagos',
-    description: 'Modern terrace houses with CCTV security, fitted kitchens, and 24hr backup power supply.',
-    image: '/api/placeholder/600/400',
-    category: 'Modern Living',
+    description: '4 units of modern 3-bedroom terrace houses with CCTV security, fitted kitchens, and 24hr backup power supply.',
+    image: '/api/placeholder/600/400?text=NT+Apartments+I',
+    category: 'Modern Residential',
     status: 'Completed',
-    gradient: 'from-blue-600 via-purple-600 to-indigo-700',
+    gradient: 'from-blue-600 to-purple-purple600 via-indigo-700',
     delay: 0.4,
+    extendedDescription: 'The NT Apartment is a 4-unit development of 3-bedroom terrace houses plus BQ, crafted on ground and first floors with 2 car parking spaces per unit. The ground floor facilitates a living and dining area, a fully fitted kitchen with a store, a visitor’s toilet, and a maid’s room, while the upper floor has an en-suite master bedroom and 2 standard bedrooms. Attractions include CCTV security cameras, green areas, paved walkways, individual compounds, and a gatehouse.',
+    features: [
+      '4 units of 3-bedroom terrace houses',
+      '2 car parking spaces per unit',
+      'CCTV security cameras',
+      'Fully fitted kitchen with store',
+      'Green areas and paved walkways',
+      'Individual compound and gatehouse',
+    ],
+    gallery: [
+      '/api/placeholder/1200/800?text=NT+Apartments+I+Main',
+      '/api/placeholder/1200/800?text=NT+Apartments+I+Living',
+      '/api/placeholder/1200/800?text=NT+Apartments+I+Exterior',
+    ],
   },
-]
+  {
+    id: 4,
+    title: 'NT Apartments II',
+    location: 'Thomas Estate, Ajah, Lagos',
+    description: '6 units of 3-bedroom terrace houses and 1 unit of 2-bedroom terrace with CCTV, fitted kitchens, and 24hr backup power.',
+    image: '/api/placeholder/600/400?text=NT+Apartments+II',
+    category: 'Modern Residential',
+    status: 'Completed',
+    gradient: 'from-blue-600 to-purple-600 to-indigo-700',
+    delay: 0.8,
+    extendedDescription: 'The NT Apartments II comprises 6 units of 3-bedroom terrace houses plus a BQ and 1 unit of a 2-bedroom terrace with 3 car parking spaces per unit. Designed with features like CCTV security cameras, fitted kitchens, 24hr backup power supply, children’s play area, paved walkways, and green areas. Crafted at a serene location for a quality communal living experience.',
+    features: [
+      '6 units of 3-bedroom terraces, 1 unit of 2-bedroom terrace',
+      '3 car parking spaces per unit',
+      'CCTV security cameras',
+      '24hr backup power supply',
+      'Children’s play area',
+      'Paved walkways and green areas',
+    ],
+    gallery: [
+      '/api/placeholder/1200/800?text=NT+Apartments+II+Main',
+      '/api/placeholder/1200/800?text=NT+Apartments+II+Play+Area',
+      '/api/placeholder/1200/800?text=NT+Apartments+II+Exterior',
+    ],
+  },
+  {
+    id: 5,
+    title: 'Grace Court Estate I',
+    location: 'Kassim Oyofor Street, Ajah, Lagos',
+    description: 'Mini residential development with 23 units of terrace houses featuring gym, bistro, and recreational areas.',
+    image: '/api/placeholder/600/400?text=Grace+Court+Estate+I',
+    category: 'Estate Development',
+    status: 'Completed',
+    gradient: 'from-gray-700 to-gray-800 via-gray-900',
+    delay: 0.2,
+    extendedDescription: 'Grace Court Estate is a mini-residential development located in Ajah, Lagos. It includes a total of 6 blocks with 23 units of terrace houses, comprising 16 units of 4-bedroom terraces and 7 units of 2-bedroom terraces, each with a maid’s room. Units are equipped with 2 parking spaces, a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
+    features: [
+      '16 units of 4-bedroom terraces, 7 units of 2-bedroom terraces',
+      '2 parking spaces per unit',
+      'Gym and bistro facilities',
+      'Outdoor recreation area',
+      'High-speed internet and CCTV surveillance',
+    ],
+    gallery: [
+      '/api/placeholder/1200/800?text=Grace+Court+Estate+I+Main',
+      '/api/placeholder/1200/800?text=Grace+Court+Estate+I+Gym',
+      '/api/placeholder/1200/800?text=Grace+Court+Estate+I+Recreation',
+    ],
+  },
+  {
+    id: 6,
+    title: 'Grace Court Estate II',
+    location: 'Kassim Oyofor Street, Ajah, Lagos',
+    description: 'Continuation of the mini-residential development with additional terrace units and enhanced facilities.',
+    image: '/api/placeholder/600/400?text=Grace+Court+Estate+II',
+    category: 'Estate Development',
+    status: 'Ongoing',
+    gradient: 'from-gray-700 via-gray-800 to-black',
+    delay: 1.0,
+    extendedDescription: 'Grace Court Estate II is the continuation of the successful mini-residential development in Ajah, Lagos. It features additional terrace units with the same high-quality standards as Grace Court Estate I, including 4-bedroom and 2-bedroom terraces with maid’s rooms, 2 parking spaces per unit, and exclusive facilities like a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
+    features: [
+      'Additional 4-bedroom and 2-bedroom terraces',
+      '2 parking spaces per unit',
+      'Gym and bistro facilities',
+      'Outdoor recreation area',
+      'High-speed internet and CCTV surveillance',
+    ],
+    gallery: [
+      '/api/placeholder/1200/800?text=Grace+Court+Estate+II+Main',
+      '/api/placeholder/1200/800?text=Grace+Court+Estate+II+Bistro',
+      '/api/placeholder/1200/800?text=Grace+Court+Estate+II+Exterior',
+    ],
+  },
+];
 
 export default function Projects() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null)
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -54,7 +168,7 @@ export default function Projects() {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 80, scale: 0.9 },
@@ -67,7 +181,7 @@ export default function Projects() {
         ease: [0.6, -0.05, 0.01, 0.99],
       },
     },
-  }
+  };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 60, rotateX: -10 },
@@ -80,7 +194,7 @@ export default function Projects() {
         ease: 'easeOut',
       },
     },
-  }
+  };
 
   return (
     <section id="projects" className="py-24 bg-white relative overflow-hidden">
@@ -116,7 +230,7 @@ export default function Projects() {
               className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
               variants={itemVariants}
             >
-              Discover our portfolio of luxury developments that showcase our commitment to 
+              Discover our portfolio of luxury developments that showcase our commitment to
               excellence and innovation in real estate.
             </motion.p>
           </motion.div>
@@ -126,169 +240,170 @@ export default function Projects() {
             className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10"
             variants={containerVariants}
           >
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                className="group relative"
-                variants={cardVariants}
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
-                whileHover={{ y: -15, scale: 1.02 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-              >
+            {projects.map((project) => (
+              <Link href={`/projects/${project.id}`} key={project.id}>
                 <motion.div
-                  className="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700"
-                  whileHover={{
-                    boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.3)',
-                  }}
+                  className="group relative cursor-pointer"
+                  variants={cardVariants}
+                  onMouseEnter={() => setHoveredProject(project.id as number)}
+                  onMouseLeave={() => setHoveredProject(null)}
+                  whileHover={{ y: -15, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
                 >
-                  {/* Image Container */}
-                  <div className="relative h-64 lg:h-72 overflow-hidden">
-                    {/* Gradient Background (placeholder for image) */}
-                    <motion.div
-                      className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`}
-                      animate={{
-                        scale: hoveredProject === project.id ? 1.1 : 1,
-                        rotate: hoveredProject === project.id ? 2 : 0,
-                      }}
-                      transition={{ duration: 0.6, ease: 'easeOut' }}
-                    />
+                  <motion.div
+                    className="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700"
+                    whileHover={{
+                      boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.3)',
+                    }}
+                  >
+                    {/* Image Container */}
+                    <div className="relative h-64 lg:h-72 overflow-hidden">
+                      {/* Gradient Background (placeholder for image) */}
+                      <motion.div
+                        className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`}
+                        animate={{
+                          scale: hoveredProject === project.id ? 1.1 : 1,
+                          rotate: hoveredProject === project.id ? 2 : 0,
+                        }}
+                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                      />
 
-                    {/* Overlay Effects */}
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                    />
+                      {/* Overlay Effects */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 1 }}
+                      />
 
-                    {/* Status Badge */}
-                    <motion.div
-                      className="absolute top-4 left-4 z-10"
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: project.delay + 0.3 }}
-                    >
-                      <span
-                        className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                          project.status === 'Completed'
-                            ? 'bg-green-500 text-white'
-                            : 'bg-yellow-500 text-black'
-                        }`}
+                      {/* Status Badge */}
+                      <motion.div
+                        className="absolute top-4 left-4 z-10"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: project.delay + 0.3 }}
                       >
-                        {project.status}
-                      </span>
-                    </motion.div>
+                        <span
+                          className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                            project.status === 'Completed'
+                              ? 'bg-green-500 text-white'
+                              : 'bg-yellow-500 text-black'
+                          }`}
+                        >
+                          {project.status}
+                        </span>
+                      </motion.div>
 
-                    {/* View Project Button */}
+                      {/* View Project Button */}
+                      <motion.div
+                        className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        initial={{ scale: 0 }}
+                        whileHover={{ scale: 1 }}
+                        transition={{ duration: 0.3, delay: 0.1 }}
+                      >
+                        <motion.div
+                          className="bg-white/90 backdrop-blur-sm text-gray-900 px-6 py-3 rounded-full font-semibold flex items-center gap-2 hover:bg-white transition-colors duration-200"
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <Eye size={18} />
+                          View Project
+                        </motion.div>
+                      </motion.div>
+
+                      {/* Floating Elements */}
+                      <motion.div
+                        className="absolute top-1/2 right-6 w-3 h-3 bg-white/70 rounded-full"
+                        animate={{
+                          y: [-10, 10, -10],
+                          opacity: [0.5, 1, 0.5],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                          delay: project.delay,
+                        }}
+                      />
+                    </div>
+
+                    {/* Content */}
                     <motion.div
-                      className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      initial={{ scale: 0 }}
-                      whileHover={{ scale: 1 }}
-                      transition={{ duration: 0.3, delay: 0.1 }}
+                      className="p-6 lg:p-8"
+                      initial={{ opacity: 0.8 }}
+                      whileHover={{ opacity: 1 }}
                     >
-                      <motion.button
-                        className="bg-white/90 backdrop-blur-sm text-gray-900 px-6 py-3 rounded-full font-semibold flex items-center gap-2 hover:bg-white transition-colors duration-200"
+                      {/* Category */}
+                      <motion.span
+                        className="text-gold font-semibold text-sm uppercase tracking-wider mb-2 block"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: project.delay + 0.4 }}
+                      >
+                        {project.category}
+                      </motion.span>
+
+                      {/* Title */}
+                      <motion.h3
+                        className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gold transition-colors duration-300"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: project.delay + 0.5 }}
+                      >
+                        {project.title}
+                      </motion.h3>
+
+                      {/* Location */}
+                      <motion.div
+                        className="flex items-center gap-2 text-gray-600 mb-4"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: project.delay + 0.6 }}
+                      >
+                        <MapPin size={16} />
+                        <span className="text-sm">{project.location}</span>
+                      </motion.div>
+
+                      {/* Description */}
+                      <motion.p
+                        className="text-gray-600 leading-relaxed mb-6"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: project.delay + 0.7 }}
+                      >
+                        {project.description}
+                      </motion.p>
+
+                      {/* Learn More Link */}
+                      <motion.div
+                        className="inline-flex items-center gap-2 text-gold font-semibold hover:text-yellow-500 transition-colors duration-200 group/btn"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: project.delay + 0.8 }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <Eye size={18} />
-                        View Project
-                      </motion.button>
-                    </motion.div>
-
-                    {/* Floating Elements */}
-                    <motion.div
-                      className="absolute top-1/2 right-6 w-3 h-3 bg-white/70 rounded-full"
-                      animate={{
-                        y: [-10, 10, -10],
-                        opacity: [0.5, 1, 0.5],
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                        delay: index * 0.5,
-                      }}
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <motion.div
-                    className="p-6 lg:p-8"
-                    initial={{ opacity: 0.8 }}
-                    whileHover={{ opacity: 1 }}
-                  >
-                    {/* Category */}
-                    <motion.span
-                      className="text-gold font-semibold text-sm uppercase tracking-wider mb-2 block"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: project.delay + 0.4 }}
-                    >
-                      {project.category}
-                    </motion.span>
-
-                    {/* Title */}
-                    <motion.h3
-                      className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gold transition-colors duration-300"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: project.delay + 0.5 }}
-                    >
-                      {project.title}
-                    </motion.h3>
-
-                    {/* Location */}
-                    <motion.div
-                      className="flex items-center gap-2 text-gray-600 mb-4"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: project.delay + 0.6 }}
-                    >
-                      <MapPin size={16} />
-                      <span className="text-sm">{project.location}</span>
-                    </motion.div>
-
-                    {/* Description */}
-                    <motion.p
-                      className="text-gray-600 leading-relaxed mb-6"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: project.delay + 0.7 }}
-                    >
-                      {project.description}
-                    </motion.p>
-
-                    {/* Learn More Link */}
-                    <motion.button
-                      className="inline-flex items-center gap-2 text-gold font-semibold hover:text-yellow-500 transition-colors duration-200 group/btn"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: project.delay + 0.8 }}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Learn More
-                      <motion.div
-                        whileHover={{ x: 5 }}
-                        transition={{ type: 'spring', stiffness: 300 }}
-                      >
-                        <ExternalLink size={16} />
+                        Learn More
+                        <motion.div
+                          whileHover={{ x: 5 }}
+                          transition={{ type: 'spring', stiffness: 300 }}
+                        >
+                          <ExternalLink size={16} />
+                        </motion.div>
                       </motion.div>
-                    </motion.button>
-                  </motion.div>
+                    </motion.div>
 
-                  {/* Border Glow Effect */}
-                  <motion.div
-                    className="absolute inset-0 border-2 border-transparent rounded-3xl"
-                    whileHover={{
-                      borderColor: '#d4af37',
-                      boxShadow: '0 0 30px rgba(212, 175, 55, 0.3)',
-                    }}
-                    transition={{ duration: 0.3 }}
-                  />
+                    {/* Border Glow Effect */}
+                    <motion.div
+                      className="absolute inset-0 border-2 border-transparent rounded-3xl"
+                      whileHover={{
+                        borderColor: '#d4af37',
+                        boxShadow: '0 0 30px rgba(212, 175, 55, 0.3)',
+                      }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </motion.div>
                 </motion.div>
-              </motion.div>
+              </Link>
             ))}
           </motion.div>
 
@@ -308,5 +423,5 @@ export default function Projects() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

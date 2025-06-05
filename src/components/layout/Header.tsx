@@ -1,31 +1,39 @@
-'use client';
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
+'use client'
+
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Menu, X } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 const navigation = [
-  { href: '/', label: 'Home' },
-  { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
-  { href: '/projects', label: 'Projects' },
-  { href: '/team', label: 'Team' },
-  { href: '/contact', label: 'Contact' },
-];
+  { name: 'Home', href: '#home' },
+  { name: 'About', href: '#about' },
+  { name: 'Services', href: '#services' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Team', href: '#team' },
+  { name: 'Contact', href: '#contact' },
+]
 
 export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+      setIsScrolled(window.scrollY > 50)
+    }
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const handleNavClick = (href: string) => {
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+    setIsMobileMenuOpen(false)
+  }
 
   return (
     <motion.header
@@ -45,32 +53,27 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link href="/">
-              <h1 className="text-2xl font-bold gradient-text cursor-pointer">
-                PCL
-              </h1>
-            </Link>
+            <h1 className="text-2xl font-bold gradient-text cursor-default">
+              PCL
+            </h1>
           </motion.div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
               {navigation.map((item, index) => (
-                <motion.div
-                  key={item.label}
+                <motion.button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.href)}
+                  className="text-white hover:text-gold transition-colors duration-300 font-medium"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                 >
-                  <Link
-                    href={item.href}
-                    className="text-white hover:text-gold transition-colors duration-300 font-medium"
-                  >
-                    {item.label}
-                  </Link>
-                </motion.div>
+                  {item.name}
+                </motion.button>
               ))}
             </div>
           </nav>
@@ -99,26 +102,22 @@ export default function Header() {
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
               {navigation.map((item, index) => (
-                <motion.div
-                  key={item.label}
+                <motion.button
+                  key={item.name}
+                  onClick={() => handleNavClick(item.href)}
+                  className="block w-full text-left px-3 py-2 text-white hover:text-gold transition-colors duration-300 font-medium"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   whileHover={{ x: 10 }}
                 >
-                  <Link
-                    href={item.href}
-                    className="block w-full text-left px-3 py-2 text-white hover:text-gold transition-colors duration-300 font-medium"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                </motion.div>
+                  {item.name}
+                </motion.button>
               ))}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </motion.header>
-  );
+  )
 }
