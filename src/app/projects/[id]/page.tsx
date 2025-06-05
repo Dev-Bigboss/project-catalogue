@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { MapPin, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 interface PageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
+  }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 // Project data (same as in projects/page.jsx)
@@ -71,7 +71,7 @@ const projects = [
     category: 'Modern Residential',
     status: 'Completed',
     gradient: 'from-blue-600 via-purple-600 to-indigo-700',
-    extendedDescription: 'The NT Apartment is a 4-unit development of 3-bedroom terrace houses plus BQ, crafted on ground and first floors with 2 car parking spaces per unit. The ground floor facilitates a living and dining area, a fully fitted kitchen with a store, a visitor’s toilet, and a maid’s room, while the upper floor has an en-suite master bedroom and 2 standard bedrooms. Attractions include CCTV security cameras, green areas, paved walkways, individual compounds, and a gatehouse.',
+    extendedDescription: 'The NT Apartment is a 4-unit development of 3-bedroom terrace houses plus BQ, crafted on ground and first floors with 2 car parking spaces per unit. The ground floor facilitates a living and dining area, a fully fitted kitchen with a store, a visitor&#39;s toilet, and a maid&#39;s room, while the upper floor has an en-suite master bedroom and 2 standard bedrooms. Attractions include CCTV security cameras, green areas, paved walkways, individual compounds, and a gatehouse.',
     features: [
       '4 units of 3-bedroom terrace houses',
       '2 car parking spaces per unit',
@@ -95,13 +95,13 @@ const projects = [
     category: 'Modern Residential',
     status: 'Completed',
     gradient: 'from-blue-600 via-purple-600 to-indigo-700',
-    extendedDescription: 'The NT Apartments II comprises 6 units of 3-bedroom terrace houses plus a BQ and 1 unit of a 2-bedroom terrace with 3 car parking spaces per unit. Designed with features like CCTV security cameras, fitted kitchens, 24hr backup power supply, children’s play area, paved walkways, and green areas. Crafted at a serene location for a quality communal living experience.',
+    extendedDescription: 'The NT Apartments II comprises 6 units of 3-bedroom terrace houses plus a BQ and 1 unit of a 2-bedroom terrace with 3 car parking spaces per unit. Designed with features like CCTV security cameras, fitted kitchens, 24hr backup power supply, children&#39;s play area, paved walkways, and green areas. Crafted at a serene location for a quality communal living experience.',
     features: [
       '6 units of 3-bedroom terraces, 1 unit of 2-bedroom terrace',
       '3 car parking spaces per unit',
       'CCTV security cameras',
       '24hr backup power supply',
-      'Children’s play area',
+      'Children&#39;s play area',
       'Paved walkways and green areas',
     ],
     gallery: [
@@ -119,7 +119,7 @@ const projects = [
     category: 'Estate Development',
     status: 'Completed',
     gradient: 'from-gray-700 via-gray-800 to-black',
-    extendedDescription: 'Grace Court Estate is a mini-residential development located in Ajah, Lagos. It includes a total of 6 blocks with 23 units of terrace houses, comprising 16 units of 4-bedroom terraces and 7 units of 2-bedroom terraces, each with a maid’s room. Units are equipped with 2 parking spaces, a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
+    extendedDescription: 'Grace Court Estate is a mini-residential development located in Ajah, Lagos. It includes a total of 6 blocks with 23 units of terrace houses, comprising 16 units of 4-bedroom terraces and 7 units of 2-bedroom terraces, each with a maid&#39;s room. Units are equipped with 2 parking spaces, a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
     features: [
       '16 units of 4-bedroom terraces, 7 units of 2-bedroom terraces',
       '2 parking spaces per unit',
@@ -142,7 +142,7 @@ const projects = [
     category: 'Estate Development',
     status: 'Ongoing',
     gradient: 'from-gray-700 via-gray-800 to-black',
-    extendedDescription: 'Grace Court Estate II is the continuation of the successful mini-residential development in Ajah, Lagos. It features additional terrace units with the same high-quality standards as Grace Court Estate I, including 4-bedroom and 2-bedroom terraces with maid’s rooms, 2 parking spaces per unit, and exclusive facilities like a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
+    extendedDescription: 'Grace Court Estate II is the continuation of the successful mini-residential development in Ajah, Lagos. It features additional terrace units with the same high-quality standards as Grace Court Estate I, including 4-bedroom and 2-bedroom terraces with maid&#39;s rooms, 2 parking spaces per unit, and exclusive facilities like a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
     features: [
       'Additional 4-bedroom and 2-bedroom terraces',
       '2 parking spaces per unit',
@@ -159,13 +159,44 @@ const projects = [
 ];
 
 export default function ProjectDetail({ params }: PageProps) {
-  const { id } = params;
-  const project = projects.find((p) => p.id === parseInt(id));
+  const [project, setProject] = useState<typeof projects[0] | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
+  useEffect(() => {
+    const getParams = async () => {
+      try {
+        const resolvedParams = await params;
+        const foundProject = projects.find((p) => p.id === parseInt(resolvedParams.id));
+        
+        if (!foundProject) {
+          notFound();
+          return;
+        }
+        
+        setProject(foundProject);
+      } catch (error) {
+        console.error('Error resolving params:', error);
+        notFound();
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    getParams();
+  }, [params]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gold"></div>
+      </div>
+    );
+  }
+
   if (!project) {
-    notFound();
+    return null; // This shouldn't happen as notFound() should redirect
   }
 
   const containerVariants = {
@@ -290,7 +321,7 @@ export default function ProjectDetail({ params }: PageProps) {
                     style={{ backgroundImage: `url(${img})` }}
                   />
                   <motion.div
-                    className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center"
+                    className="absolute inset-0 bg-black/20 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                     whileHover={{ opacity: 1 }}
                   >
                     <motion.button
