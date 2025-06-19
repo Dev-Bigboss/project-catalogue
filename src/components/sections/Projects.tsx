@@ -1,6 +1,6 @@
 'use client';
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { MapPin, Eye, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -158,7 +158,6 @@ const projects = [
 export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [hoveredProject, setHoveredProject] = useState(0);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -246,8 +245,7 @@ export default function Projects() {
                 key={project.id}
                 className="group relative cursor-pointer"
                 variants={cardVariants}
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(0)}
+                
                 whileHover={{ y: -15, scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
               >
