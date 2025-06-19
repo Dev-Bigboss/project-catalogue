@@ -56,7 +56,8 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: 'url(/image3.jpg)' }}
     >
       {/* Animated Background Elements */}
       <motion.div
@@ -74,7 +75,7 @@ export default function Hero() {
         style={{ y: y2 }}
       >
         <div className="absolute top-1/4 left-1/4 w-32 h-32 border-2 border-gold rotate-45 animate-spin" style={{ animationDuration: '20s' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-24 h-24 border-2 border-white rotate-12 animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-24 h-24 border-2 border-gray-800 rotate-12 animate-pulse" />
         <div className="absolute top-1/2 right-1/3 w-16 h-16 bg-gradient-to-r from-gold to-transparent rounded-full animate-bounce" />
       </motion.div>
 
@@ -88,7 +89,7 @@ export default function Hero() {
       >
         <motion.div variants={itemVariants}>
           <motion.h1
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-gray-900 mb-6"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{
@@ -113,7 +114,7 @@ export default function Hero() {
         </motion.div>
 
         <motion.p
-          className="text-xl md:text-2xl lg:text-3xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
+          className="text-xl md:text-2xl lg:text-3xl text-white mb-12 max-w-4xl mx-auto leading-relaxed"
           variants={itemVariants}
         >
           Transforming concepts into{' '}
@@ -140,7 +141,7 @@ export default function Hero() {
           variants={itemVariants}
         >
           <motion.button
-            className="bg-gradient-to-r from-gold to-yellow-400 text-black px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all duration-300"
+            className="bg-gradient-to-r from-gold to-yellow-400 text-gray-900 px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all duration-300"
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
@@ -156,7 +157,7 @@ export default function Hero() {
           </motion.button>
 
           <motion.button
-            className="border-2 border-white text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-sm"
+            className="border-2 border-gray-800 text-gray-800 px-10 py-4 rounded-full font-bold text-lg hover:bg-gray-800 hover:text-white transition-all duration-300 backdrop-blur-sm"
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
@@ -174,11 +175,11 @@ export default function Hero() {
           transition={{ delay: 2, duration: 1 }}
         >
           <motion.div
-            className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center"
+            className="w-6 h-10 border-2 border-gray-800/50 rounded-full flex justify-center"
             whileHover={{ scale: 1.1 }}
           >
             <motion.div
-              className="w-1 h-3 bg-white/70 rounded-full mt-2"
+              className="w-1 h-3 bg-gray-800/70 rounded-full mt-2"
               animate={{ y: [0, 12, 0] }}
               transition={{
                 duration: 1.5,
@@ -191,7 +192,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent pointer-events-none" />
     </section>
   )
 }

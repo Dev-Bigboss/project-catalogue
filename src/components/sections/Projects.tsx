@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { MapPin, Eye, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const projects = [
   {
@@ -10,7 +11,7 @@ const projects = [
     title: 'Euphoria Residence I',
     location: 'Victory Park Estate, Osapa London, Lekki, Lagos',
     description: 'A luxurious 5-bedroom detached house with BQ, featuring indoor/outdoor spatial flow, enchanting entry experience, and generous outdoor space.',
-    image: '/api/placeholder/600/400?text=Euphoria+Residence+I',
+    image: '/image2.jpg',
     category: 'Luxury Residential',
     status: 'Completed',
     gradient: 'from-gold via-yellow-400 to-amber-500',
@@ -24,9 +25,9 @@ const projects = [
       'Communal living areas',
     ],
     gallery: [
-      '/api/placeholder/1200/800?text=Euphoria+Residence+I+Main',
-      '/api/placeholder/1200/800?text=Euphoria+Residence+I+Interior',
-      '/api/placeholder/1200/800?text=Euphoria+Residence+I+Exterior',
+      '/image2-1.jpg',
+      '/image2-2.jpg',
+      '/image2-3.jpg',
     ],
   },
   {
@@ -34,7 +35,7 @@ const projects = [
     title: 'Euphoria Residence II',
     location: 'Victory Park Estate, Osapa London, Lekki, Lagos',
     description: 'A divine luxury contemporary 5-bedroom detached home with a reflecting pool, gym, cinema, and fully fitted kitchen.',
-    image: '/api/placeholder/600/400?text=Euphoria+Residence+II',
+    image: '/image3.jpg',
     category: 'Luxury Residential',
     status: 'Completed',
     gradient: 'from-gold via-yellow-400 to-amber-500',
@@ -49,9 +50,9 @@ const projects = [
       'Modern-style architecture',
     ],
     gallery: [
-      '/api/placeholder/1200/800?text=Euphoria+Residence+II+Main',
-      '/api/placeholder/1200/800?text=Euphoria+Residence+II+Pool',
-      '/api/placeholder/1200/800?text=Euphoria+Residence+II+Gym',
+      '/image3-1.jpg',
+      '/image3-2.jpg',
+      '/image3-3.jpg',
     ],
   },
   {
@@ -59,12 +60,12 @@ const projects = [
     title: 'NT Apartments I',
     location: 'Thomas Estate, Ajah, Lagos',
     description: '4 units of modern 3-bedroom terrace houses with CCTV security, fitted kitchens, and 24hr backup power supply.',
-    image: '/api/placeholder/600/400?text=NT+Apartments+I',
+    image: '/image4.jpg',
     category: 'Modern Residential',
     status: 'Completed',
-    gradient: 'from-blue-600 to-purple-purple600 via-indigo-700',
+    gradient: 'from-blue-600 to-purple-600 via-indigo-700',
     delay: 0.4,
-    extendedDescription: 'The NT Apartment is a 4-unit development of 3-bedroom terrace houses plus BQ, crafted on ground and first floors with 2 car parking spaces per unit. The ground floor facilitates a living and dining area, a fully fitted kitchen with a store, a visitor’s toilet, and a maid’s room, while the upper floor has an en-suite master bedroom and 2 standard bedrooms. Attractions include CCTV security cameras, green areas, paved walkways, individual compounds, and a gatehouse.',
+    extendedDescription: 'The NT Apartment is a 4-unit development of 3-bedroom terrace houses plus BQ, crafted on ground and first floors with 2 car parking spaces per unit. The ground floor facilitates a living and dining area, a fully fitted kitchen with a store, a visitor\'s toilet, and a maid\'s room, while the upper floor has an en-suite master bedroom and 2 standard bedrooms. Attractions include CCTV security cameras, green areas, paved walkways, individual compounds, and a gatehouse.',
     features: [
       '4 units of 3-bedroom terrace houses',
       '2 car parking spaces per unit',
@@ -74,9 +75,9 @@ const projects = [
       'Individual compound and gatehouse',
     ],
     gallery: [
-      '/api/placeholder/1200/800?text=NT+Apartments+I+Main',
-      '/api/placeholder/1200/800?text=NT+Apartments+I+Living',
-      '/api/placeholder/1200/800?text=NT+Apartments+I+Exterior',
+      '/image4-1.jpg',
+      '/image4-2.jpg',
+      '/image4-3.jpg',
     ],
   },
   {
@@ -84,24 +85,24 @@ const projects = [
     title: 'NT Apartments II',
     location: 'Thomas Estate, Ajah, Lagos',
     description: '6 units of 3-bedroom terrace houses and 1 unit of 2-bedroom terrace with CCTV, fitted kitchens, and 24hr backup power.',
-    image: '/api/placeholder/600/400?text=NT+Apartments+II',
+    image: '/VIEW1A.bmp',
     category: 'Modern Residential',
     status: 'Completed',
-    gradient: 'from-blue-600 to-purple-600 to-indigo-700',
+    gradient: 'from-blue-600 to-purple-600 via-indigo-700',
     delay: 0.8,
-    extendedDescription: 'The NT Apartments II comprises 6 units of 3-bedroom terrace houses plus a BQ and 1 unit of a 2-bedroom terrace with 3 car parking spaces per unit. Designed with features like CCTV security cameras, fitted kitchens, 24hr backup power supply, children’s play area, paved walkways, and green areas. Crafted at a serene location for a quality communal living experience.',
+    extendedDescription: 'The NT Apartments II comprises 6 units of 3-bedroom terrace houses plus a BQ and 1 unit of a 2-bedroom terrace with 3 car parking spaces per unit. Designed with features like CCTV security cameras, fitted kitchens, 24hr backup power supply, children\'s play area, paved walkways, and green areas. Crafted at a serene location for a quality communal living experience.',
     features: [
       '6 units of 3-bedroom terraces, 1 unit of 2-bedroom terrace',
       '3 car parking spaces per unit',
       'CCTV security cameras',
       '24hr backup power supply',
-      'Children’s play area',
+      'Children\'s play area',
       'Paved walkways and green areas',
     ],
     gallery: [
-      '/api/placeholder/1200/800?text=NT+Apartments+II+Main',
-      '/api/placeholder/1200/800?text=NT+Apartments+II+Play+Area',
-      '/api/placeholder/1200/800?text=NT+Apartments+II+Exterior',
+      '/VIEW2A.bmp',
+      '/VIEW3C.bmp',
+      '/VIEW6A.bmp',
     ],
   },
   {
@@ -109,12 +110,12 @@ const projects = [
     title: 'Grace Court Estate I',
     location: 'Kassim Oyofor Street, Ajah, Lagos',
     description: 'Mini residential development with 23 units of terrace houses featuring gym, bistro, and recreational areas.',
-    image: '/api/placeholder/600/400?text=Grace+Court+Estate+I',
+    image: '/image4.jpg',
     category: 'Estate Development',
     status: 'Completed',
     gradient: 'from-gray-700 to-gray-800 via-gray-900',
     delay: 0.2,
-    extendedDescription: 'Grace Court Estate is a mini-residential development located in Ajah, Lagos. It includes a total of 6 blocks with 23 units of terrace houses, comprising 16 units of 4-bedroom terraces and 7 units of 2-bedroom terraces, each with a maid’s room. Units are equipped with 2 parking spaces, a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
+    extendedDescription: 'Grace Court Estate is a mini-residential development located in Ajah, Lagos. It includes a total of 6 blocks with 23 units of terrace houses, comprising 16 units of 4-bedroom terraces and 7 units of 2-bedroom terraces, each with a maid\'s room. Units are equipped with 2 parking spaces, a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
     features: [
       '16 units of 4-bedroom terraces, 7 units of 2-bedroom terraces',
       '2 parking spaces per unit',
@@ -123,9 +124,9 @@ const projects = [
       'High-speed internet and CCTV surveillance',
     ],
     gallery: [
-      '/api/placeholder/1200/800?text=Grace+Court+Estate+I+Main',
-      '/api/placeholder/1200/800?text=Grace+Court+Estate+I+Gym',
-      '/api/placeholder/1200/800?text=Grace+Court+Estate+I+Recreation',
+      '/image6-1.jpg',
+      '/image6-2.jpg',
+      '/image6-3.jpg',
     ],
   },
   {
@@ -133,12 +134,12 @@ const projects = [
     title: 'Grace Court Estate II',
     location: 'Kassim Oyofor Street, Ajah, Lagos',
     description: 'Continuation of the mini-residential development with additional terrace units and enhanced facilities.',
-    image: '/api/placeholder/600/400?text=Grace+Court+Estate+II',
+    image: '/image5.jpg',
     category: 'Estate Development',
     status: 'Ongoing',
     gradient: 'from-gray-700 via-gray-800 to-black',
     delay: 1.0,
-    extendedDescription: 'Grace Court Estate II is the continuation of the successful mini-residential development in Ajah, Lagos. It features additional terrace units with the same high-quality standards as Grace Court Estate I, including 4-bedroom and 2-bedroom terraces with maid’s rooms, 2 parking spaces per unit, and exclusive facilities like a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
+    extendedDescription: 'Grace Court Estate II is the continuation of the successful mini-residential development in Ajah, Lagos. It features additional terrace units with the same high-quality standards as Grace Court Estate I, including 4-bedroom and 2-bedroom terraces with maid\'s rooms, 2 parking spaces per unit, and exclusive facilities like a gym, bistro, outdoor recreation area, high-speed internet, and CCTV surveillance.',
     features: [
       'Additional 4-bedroom and 2-bedroom terraces',
       '2 parking spaces per unit',
@@ -147,9 +148,9 @@ const projects = [
       'High-speed internet and CCTV surveillance',
     ],
     gallery: [
-      '/api/placeholder/1200/800?text=Grace+Court+Estate+II+Main',
-      '/api/placeholder/1200/800?text=Grace+Court+Estate+II+Bistro',
-      '/api/placeholder/1200/800?text=Grace+Court+Estate+II+Exterior',
+      '/image7-1.jpg',
+      '/image7-2.jpg',
+      '/image7-3.jpg',
     ],
   },
 ];
@@ -157,7 +158,7 @@ const projects = [
 export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [hoveredProject, setHoveredProject] = useState(0);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -197,7 +198,7 @@ export default function Projects() {
   };
 
   return (
-    <section id="projects" className="py-24 bg-white relative overflow-hidden">
+    <section id="projects" className="py-24 bg-white relative overflow-hidden font-lora">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-gold to-yellow-400 rounded-full animate-pulse" />
@@ -214,7 +215,7 @@ export default function Projects() {
           {/* Header */}
           <motion.div className="text-center mb-20" variants={itemVariants}>
             <motion.h2
-              className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
+              className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-cinzel"
               variants={itemVariants}
             >
               Featured{' '}
@@ -227,7 +228,7 @@ export default function Projects() {
               </motion.span>
             </motion.h2>
             <motion.p
-              className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed"
               variants={itemVariants}
             >
               Discover our portfolio of luxury developments that showcase our commitment to
@@ -241,15 +242,16 @@ export default function Projects() {
             variants={containerVariants}
           >
             {projects.map((project) => (
-              <Link href={`/projects/${project.id}`} key={project.id}>
-                <motion.div
-                  className="group relative cursor-pointer"
-                  variants={cardVariants}
-                  onMouseEnter={() => setHoveredProject(project.id as number)}
-                  onMouseLeave={() => setHoveredProject(null)}
-                  whileHover={{ y: -15, scale: 1.02 }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                >
+              <motion.div
+                key={project.id}
+                className="group relative cursor-pointer"
+                variants={cardVariants}
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(0)}
+                whileHover={{ y: -15, scale: 1.02 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              >
+                <Link href={`/projects/${project.id}`} className="block">
                   <motion.div
                     className="relative bg-white rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-700"
                     whileHover={{
@@ -258,19 +260,17 @@ export default function Projects() {
                   >
                     {/* Image Container */}
                     <div className="relative h-64 lg:h-72 overflow-hidden">
-                      {/* Gradient Background (placeholder for image) */}
-                      <motion.div
-                        className={`absolute inset-0 bg-gradient-to-br ${project.gradient}`}
-                        animate={{
-                          scale: hoveredProject === project.id ? 1.1 : 1,
-                          rotate: hoveredProject === project.id ? 2 : 0,
-                        }}
-                        transition={{ duration: 0.6, ease: 'easeOut' }}
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        layout="fill"
+                        objectFit="cover"
+                        className="transition-transform duration-500 group-hover:scale-110"
                       />
 
                       {/* Overlay Effects */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                         initial={{ opacity: 0 }}
                         whileHover={{ opacity: 1 }}
                       />
@@ -286,7 +286,7 @@ export default function Projects() {
                           className={`px-3 py-1 rounded-full text-sm font-semibold ${
                             project.status === 'Completed'
                               ? 'bg-green-500 text-white'
-                              : 'bg-yellow-500 text-black'
+                              : 'bg-yellow-500 text-gray-900'
                           }`}
                         >
                           {project.status}
@@ -334,7 +334,7 @@ export default function Projects() {
                     >
                       {/* Category */}
                       <motion.span
-                        className="text-gold font-semibold text-sm uppercase tracking-wider mb-2 block"
+                        className="text-gold font-semibold text-sm uppercase tracking-wider mb-2 block font-cinzel"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: project.delay + 0.4 }}
@@ -344,7 +344,7 @@ export default function Projects() {
 
                       {/* Title */}
                       <motion.h3
-                        className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gold transition-colors duration-300"
+                        className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gold transition-colors duration-300 font-cinzel"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: project.delay + 0.5 }}
@@ -354,7 +354,7 @@ export default function Projects() {
 
                       {/* Location */}
                       <motion.div
-                        className="flex items-center gap-2 text-gray-600 mb-4"
+                        className="flex items-center gap-2 text-gray-700 mb-4"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: project.delay + 0.6 }}
@@ -365,7 +365,7 @@ export default function Projects() {
 
                       {/* Description */}
                       <motion.p
-                        className="text-gray-600 leading-relaxed mb-6"
+                        className="text-gray-700 leading-relaxed mb-6"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: project.delay + 0.7 }}
@@ -375,7 +375,7 @@ export default function Projects() {
 
                       {/* Learn More Link */}
                       <motion.div
-                        className="inline-flex items-center gap-2 text-gold font-semibold hover:text-yellow-500 transition-colors duration-200 group/btn"
+                        className="inline-flex items-center gap-2 text-gold font-semibold hover:text-yellow-500 transition-colors duration-200 group/btn font-cinzel"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: project.delay + 0.8 }}
@@ -402,8 +402,8 @@ export default function Projects() {
                       transition={{ duration: 0.3 }}
                     />
                   </motion.div>
-                </motion.div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -413,7 +413,7 @@ export default function Projects() {
             variants={itemVariants}
           >
             <motion.button
-              className="bg-gradient-to-r from-gold to-yellow-400 text-black px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-gradient-to-r from-gold to-yellow-400 text-gray-900 px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 font-cinzel"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >

@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
    @tailwind base;
    @tailwind components;
    @tailwind utilities;
@@ -12,6 +11,13 @@
        --color-cream: #f5f5dc;
      }
    }
+
+h1, h2, h3 {
+  font-family: var(--font-cinzel);
+}
+body, p, a {
+  font-family: var(--font-lora);
+}
 
    .gradient-text {
      background: linear-gradient(135deg, #d4af37, #ffd700);
