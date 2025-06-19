@@ -1,17 +1,28 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
-import { motion, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import { MapPin, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-interface PageProps {
-  params: Promise<{
-    id: string;
-  }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+
+interface PageParams {
+  id: string;
+}
+interface Project {
+  id: number;
+  title: string;
+  location: string;
+  description: string;
+  image: string;
+  category: string;
+  status: string;
+  gradient: string;
+  delay: number;
+  extendedDescription: string;
+  features: string[];
+  gallery: string[];
 }
 
 const projects = [
@@ -164,34 +175,28 @@ const projects = [
   },
 ];
 
-export default function ProjectDetail({ params }) {
-  const [project, setProject] = useState(null);
+
+export default function ProjectDetail({ params }: { params: PageParams }) {
+
+   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '0px' }); // Changed margin from -100px to 0px
+  // const isInView = useInView(ref, { once: true, margin: '0px' }); // Changed margin from -100px to 0px
 
-  useEffect(() => {
-    const getParams = async () => {
-      try {
-        const resolvedParams = await params;
-        const foundProject = projects.find((p) => p.id === parseInt(resolvedParams.id));
-        
-        if (!foundProject) {
-          notFound();
-          return;
-        }
-        
-        setProject(foundProject);
-      } catch (error) {
-        console.error('Error resolving params:', error);
-        notFound();
-      } finally {
-        setIsLoading(false);
-      }
-    };
+useEffect(() => {
+  const foundProject = projects.find(
+    (p) => p.id === parseInt(params.id)
+  );
 
-    getParams();
-  }, [params]);
+  if (!foundProject) {
+    notFound();
+    return;
+  }
+
+  setProject(foundProject);
+  setIsLoading(false);
+}, [params.id]);
+
 
   if (isLoading) {
     return (
