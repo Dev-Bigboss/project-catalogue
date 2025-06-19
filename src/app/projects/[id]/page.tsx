@@ -6,10 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-
-interface PageParams {
-  id: string;
-}
 interface Project {
   id: number;
   title: string;
@@ -176,7 +172,7 @@ const projects = [
 ];
 
 
-export default function ProjectDetail({ params }: { params: PageParams }) {
+export default function ProjectDetail({ params }: { params: { id: string } }) {
 
    const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
