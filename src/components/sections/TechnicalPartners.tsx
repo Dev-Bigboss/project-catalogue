@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, easeInOut } from 'framer-motion'
 import { useRef } from 'react'
 
 export default function TechnicalPartners() {
@@ -26,7 +26,7 @@ export default function TechnicalPartners() {
       rotateX: 0,
       transition: {
         duration: 0.8,
-        ease: 'easeOut',
+        ease: easeInOut,
       },
     },
   }

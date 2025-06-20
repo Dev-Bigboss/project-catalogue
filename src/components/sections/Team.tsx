@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, easeInOut } from 'framer-motion'
 import { useRef } from 'react'
 import { Award, Star, Briefcase } from 'lucide-react'
 
@@ -27,7 +27,7 @@ export default function Team() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99],
+        ease: easeInOut,
       },
     },
   }
@@ -40,7 +40,7 @@ export default function Team() {
       rotateY: 0,
       transition: {
         duration: 1,
-        ease: 'easeOut',
+        ease: easeInOut,
       },
     },
   }

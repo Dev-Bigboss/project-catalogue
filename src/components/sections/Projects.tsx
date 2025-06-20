@@ -1,5 +1,5 @@
 'use client';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, easeInOut } from 'framer-motion';
 import { useRef } from 'react';
 import { MapPin, Eye, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
@@ -178,7 +178,7 @@ export default function Projects() {
       scale: 1,
       transition: {
         duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99],
+        ease: easeInOut,
       },
     },
   };
@@ -191,7 +191,7 @@ export default function Projects() {
       rotateX: 0,
       transition: {
         duration: 1,
-        ease: 'easeOut',
+        ease: easeInOut,
       },
     },
   };

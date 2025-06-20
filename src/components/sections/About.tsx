@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, easeInOut } from 'framer-motion'
 import { useRef } from 'react'
 // import AnimatedSection from '@/components/animations/AnimatedSection'
 
@@ -26,7 +26,7 @@ export default function About() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99],
+        ease: easeInOut,
       },
     },
   }
@@ -38,7 +38,7 @@ export default function About() {
       opacity: 1,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: easeInOut,
       },
     },
   }
@@ -51,7 +51,7 @@ export default function About() {
       z: 0,
       transition: {
         duration: 1,
-        ease: 'easeOut',
+        ease: easeInOut,
       },
     },
   }

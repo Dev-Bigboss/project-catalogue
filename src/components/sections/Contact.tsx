@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, easeInOut } from 'framer-motion'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
 export default function Contact() {
@@ -32,7 +32,7 @@ export default function Contact() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.6, -0.05, 0.01, 0.99],
+        ease: easeInOut,
       },
     },
   }

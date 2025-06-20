@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowDown } from 'lucide-react'
+import { motion, useScroll, useTransform, easeInOut } from 'framer-motion';
+import { ArrowDown } from 'lucide-react';
 
 export default function Hero() {
-  const { scrollY } = useScroll()
-  const y1 = useTransform(scrollY, [0, 300], [0, 100])
-  const y2 = useTransform(scrollY, [0, 300], [0, -100])
-  const opacity = useTransform(scrollY, [0, 300], [1, 0])
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 300], [0, 100]);
+  const y2 = useTransform(scrollY, [0, 300], [0, -100]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -18,7 +18,7 @@ export default function Hero() {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 100 },
@@ -27,10 +27,10 @@ export default function Hero() {
       y: 0,
       transition: {
         duration: 0.8,
-        ease: [0.6, -0.05, 0.01, 0.99],
+        ease: easeInOut, // Use imported easing function instead of string
       },
     },
-  }
+  };
 
   const buttonVariants = {
     hidden: { opacity: 0, scale: 0.8 },
@@ -39,19 +39,20 @@ export default function Hero() {
       scale: 1,
       transition: {
         duration: 0.6,
-        ease: 'easeOut',
+        ease: easeInOut, // Use imported easing function
       },
     },
     hover: {
       scale: 1.05,
       transition: {
         duration: 0.2,
+        ease: easeInOut, // Use imported easing function
       },
     },
     tap: {
       scale: 0.95,
     },
-  }
+  };
 
   return (
     <section
@@ -94,7 +95,7 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{
               duration: 1.2,
-              ease: [0.6, -0.05, 0.01, 0.99],
+              ease: [0.6, -0.05, 0.01, 0.99], // Custom easing array
             }}
           >
             PROJECT{' '}
@@ -105,7 +106,7 @@ export default function Hero() {
               transition={{
                 duration: 1,
                 delay: 0.5,
-                ease: 'easeOut',
+                ease: easeInOut, // Use imported easing function
               }}
             >
               CATALOGUE
@@ -184,7 +185,7 @@ export default function Hero() {
               transition={{
                 duration: 1.5,
                 repeat: Infinity,
-                ease: 'easeInOut',
+                ease: easeInOut, // Use imported easing function
               }}
             />
           </motion.div>
@@ -194,5 +195,5 @@ export default function Hero() {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-gray-900/50 via-transparent to-transparent pointer-events-none" />
     </section>
-  )
+  );
 }

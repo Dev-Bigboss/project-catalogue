@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import { motion, useInView } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useInView, easeInOut } from 'framer-motion';
+import { useRef } from 'react';
 import { 
   ClipboardList, 
   Hammer, 
@@ -12,7 +12,7 @@ import {
   Users,
   Wrench,
   PaintBucket
-} from 'lucide-react'
+} from 'lucide-react';
 
 const services = [
   {
@@ -71,11 +71,11 @@ const services = [
     color: 'from-yellow-600 to-amber-500',
     delay: 1.4,
   },
-]
+];
 
 export default function Services() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -86,7 +86,7 @@ export default function Services() {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 70, scale: 0.85 },
@@ -96,12 +96,11 @@ export default function Services() {
       scale: 1,
       transition: {
         duration: 0.9,
-        ease: [0.6, -0.05, 0.01, 0.99],
-        type: 'spring',
+        ease: easeInOut, 
         bounce: 0.4,
       },
     },
-  }
+  };
 
   const cardVariants = {
     hidden: { opacity: 0, y: 60, rotateX: -20, scale: 0.9 },
@@ -112,17 +111,17 @@ export default function Services() {
       scale: 1,
       transition: {
         duration: 1,
-        ease: 'easeOut',
+        ease: easeInOut,
       },
     },
-  }
+  };
 
   const handleContactClick = () => {
-    const contactSection = document.getElementById('contact')
+    const contactSection = document.getElementById('contact');
     if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' })
+      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
-  }
+  };
 
   return (
     <section id="services" className="py-24 bg-gradient-to-b from-yellow-100 to-yellow-200 relative overflow-hidden">
@@ -290,5 +289,5 @@ export default function Services() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
