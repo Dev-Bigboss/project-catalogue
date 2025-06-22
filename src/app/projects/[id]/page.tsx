@@ -2,9 +2,9 @@
 //@ts-nocheck
 
 'use client';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import { MapPin, ArrowLeft } from 'lucide-react';
+import { MapPin, ArrowLeft, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -179,8 +179,8 @@ export default function ProjectDetail({ params }: { params: { id: string } }) {
 
    const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const ref = useRef(null);
-  // const isInView = useInView(ref, { once: true, margin: '0px' }); // Changed margin from -100px to 0px
 
 useEffect(() => {
   const foundProject = projects.find(
@@ -196,6 +196,48 @@ useEffect(() => {
   setIsLoading(false);
 }, [params.id]);
 
+// Handle keyboard navigation for modal
+useEffect(() => {
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (selectedImage === null || !project) return;
+    
+    if (e.key === 'Escape') {
+      setSelectedImage(null);
+    } else if (e.key === 'ArrowLeft') {
+      setSelectedImage(selectedImage > 0 ? selectedImage - 1 : project.gallery.length - 1);
+    } else if (e.key === 'ArrowRight') {
+      setSelectedImage(selectedImage < project.gallery.length - 1 ? selectedImage + 1 : 0);
+    }
+  };
+
+  if (selectedImage !== null) {
+    document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
+  }
+
+  return () => {
+    document.removeEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'unset';
+  };
+}, [selectedImage, project]);
+
+const openModal = (index: number) => {
+  setSelectedImage(index);
+};
+
+const closeModal = () => {
+  setSelectedImage(null);
+};
+
+const navigateImage = (direction: 'prev' | 'next') => {
+  if (!project || selectedImage === null) return;
+  
+  if (direction === 'prev') {
+    setSelectedImage(selectedImage > 0 ? selectedImage - 1 : project.gallery.length - 1);
+  } else {
+    setSelectedImage(selectedImage < project.gallery.length - 1 ? selectedImage + 1 : 0);
+  }
+};
 
   if (isLoading) {
     return (
@@ -233,138 +275,205 @@ useEffect(() => {
   };
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden font-lora">
-      {/* Hero Section */}
-      <div className="relative h-[60vh] min-h-[500px] flex items-center justify-center">
-        <Image
-          src={project.image}
-          alt={project.title}
-          fill
-          style={{ objectFit: 'cover' }}
-          className="absolute inset-0"
-        />
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        />
-        <motion.div
-          className="relative z-10 text-center px-4 sm:px-6 lg:px-8"
-          initial={{ opacity: 0, y: 60 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-4 font-cinzel">
-            {project.title}
-          </h1>
-          <div className="flex items-center justify-center gap-2 text-gray-700">
-            <MapPin size={20} />
-            <span>{project.location}</span>
-          </div>
-        </motion.div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Content Container - Simplified animation trigger */}
-        <div ref={ref}>
+    <>
+      <section className="py-24 bg-gray-200 relative overflow-hidden font-lora">
+        {/* Hero Section */}
+        <div className="relative h-[60vh] min-h-[500px] flex items-center justify-center">
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            style={{ objectFit: 'cover' }}
+            className="absolute inset-0"
+          />
           <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible" // Always animate visible instead of depending on isInView
+            className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          />
+          <motion.div
+            className="relative z-10 text-center px-4 sm:px-6 lg:px-8"
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
           >
-            {/* Back Button */}
-            <motion.div variants={itemVariants}>
-              <Link href="/projects" className="inline-flex items-center gap-2 text-gold hover:text-yellow-500 font-semibold mb-8 font-cinzel">
-                <ArrowLeft size={20} />
-                Back to Projects
-              </Link>
-            </motion.div>
-
-            {/* Project Details */}
-            <motion.div className="grid grid-cols-1 lg:grid-cols-3 gap-12" variants={containerVariants}>
-              {/* Main Content */}
-              <motion.div className="lg:col-span-2" variants={itemVariants}>
-                <h2 className="text-3xl font-bold text-gray-900 mb-6 font-cinzel">Project Overview</h2>
-                <p className="text-gray-700 leading-relaxed mb-8">{project.extendedDescription}</p>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-4 font-cinzel">Key Features</h3>
-                <ul className="list-disc pl-6 mb-8 text-gray-700">
-                  {project.features.map((feature, index) => (
-                    <li key={index} className="mb-2">{feature}</li>
-                  ))}
-                </ul>
-              </motion.div>
-
-              {/* Sidebar */}
-              <motion.div variants={itemVariants}>
-                <div className="bg-gray-100 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 font-cinzel">Project Details</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <span className="text-gray-500 font-medium">Category:</span>
-                      <p className="text-gray-900">{project.category}</p>
-                    </div>
-                    <div>
-                      <span className="text-gray-500 font-medium">Status:</span>
-                      <p className="text-gray-900">{project.status}</p>
-                    </div>
-                    <div>
-                      <span className="text-gray-500 font-medium">Location:</span>
-                      <p className="text-gray-900">{project.location}</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Image Gallery */}
-            <motion.div className="mt-12" variants={itemVariants}>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6 font-cinzel">Gallery</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {project.gallery.map((img, index) => (
-                  <motion.div
-                    key={index}
-                    className="relative h-64 rounded-lg overflow-hidden group"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
-                  >
-                    <Image
-                      src={img}
-                      alt={`${project.title} gallery image ${index + 1}`}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      className="transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <motion.div
-                      className="absolute inset-0 bg-gray-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                      whileHover={{ opacity: 1 }}
-                    >
-                      <motion.button
-                        className="text-white px-4 py-2 rounded-full bg-gray-900/50 font-cinzel"
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        Zoom
-                      </motion.button>
-                    </motion.div>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Call to Action */}
-            <motion.div className="text-center mt-16" variants={itemVariants}>
-              <motion.button
-                className="bg-gradient-to-r from-gold to-yellow-400 text-gray-900 px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 font-cinzel"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Contact Us for More Info
-              </motion.button>
-            </motion.div>
+            <h1 className="text-5xl md:text-7xl font-bold gradient-text mb-4 font-cinzel">
+              {project.title}
+            </h1>
+            <div className="flex items-center justify-center gap-2 text-gray-700">
+              <MapPin size={20} />
+              <span>{project.location}</span>
+            </div>
           </motion.div>
         </div>
-      </div>
-    </section>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Content Container */}
+          <div ref={ref}>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {/* Back Button */}
+              <motion.div variants={itemVariants}>
+                <Link href="/" className="inline-flex items-center gap-2 text-gold hover:text-yellow-500 font-semibold mb-8 font-cinzel">
+                  <ArrowLeft size={20} />
+                  Back 
+                </Link>
+              </motion.div>
+
+              {/* Project Details */}
+              <motion.div className="grid grid-cols-1 lg:grid-cols-3 gap-12" variants={containerVariants}>
+                {/* Main Content */}
+                <motion.div className="lg:col-span-2" variants={itemVariants}>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-6 font-cinzel">Project Overview</h2>
+                  <p className="text-gray-700 leading-relaxed mb-8">{project.extendedDescription}</p>
+                  <h3 className="text-2xl font-semibold text-gray-900 mb-4 font-cinzel">Key Features</h3>
+                  <ul className="list-disc pl-6 mb-8 text-gray-700">
+                    {project.features.map((feature, index) => (
+                      <li key={index} className="mb-2">{feature}</li>
+                    ))}
+                  </ul>
+                </motion.div>
+
+                {/* Sidebar */}
+                <motion.div variants={itemVariants}>
+                  <div className="bg-gray-100 rounded-lg p-6">
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4 font-cinzel">Project Details</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <span className="text-gray-500 font-medium">Category:</span>
+                        <p className="text-gray-900">{project.category}</p>
+                      </div>
+                      <div>
+                        <span className="text-gray-500 font-medium">Status:</span>
+                        <p className="text-gray-900">{project.status}</p>
+                      </div>
+                      <div>
+                        <span className="text-gray-500 font-medium">Location:</span>
+                        <p className="text-gray-900">{project.location}</p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+
+              {/* Image Gallery */}
+              <motion.div className="mt-12" variants={itemVariants}>
+                <h2 className="text-3xl font-bold text-gray-900 mb-6 font-cinzel">Gallery</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {project.gallery.map((img, index) => (
+                    <motion.div
+                      key={index}
+                      className="relative h-64 rounded-lg overflow-hidden group cursor-pointer"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ type: 'spring', stiffness: 300 }}
+                      onClick={() => openModal(index)}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${project.title} gallery image ${index + 1}`}
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        className="transition-transform duration-300 group-hover:scale-110"
+                      />
+                      <motion.div
+                        className="absolute inset-0 bg-gray-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
+                        whileHover={{ opacity: 1 }}
+                      >
+                        <motion.button
+                          className="text-white px-4 py-2 rounded-full bg-gray-900/50 font-cinzel pointer-events-none"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.9 }}
+                        >
+                          Zoom
+                        </motion.button>
+                      </motion.div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Call to Action */}
+              <motion.div className="text-center mt-16" variants={itemVariants}>
+                <motion.button
+                  className="bg-gradient-to-r from-gold to-yellow-400 text-gray-900 px-10 py-4 rounded-full font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 font-cinzel"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Contact Us for More Info
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Image Modal */}
+      <AnimatePresence>
+        {selectedImage !== null && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={closeModal}
+          >
+            <motion.div
+              className="relative max-w-4xl max-h-full w-full h-full flex items-center justify-center"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 z-10 text-white bg-black/50 rounded-full p-2 hover:bg-black/70 transition-colors"
+              >
+                <X size={24} />
+              </button>
+
+              {/* Navigation Buttons */}
+              {project.gallery.length > 1 && (
+                <>
+                  <button
+                    onClick={() => navigateImage('prev')}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 text-white bg-black/50 rounded-full p-2 hover:bg-black/70 transition-colors"
+                  >
+                    <ChevronLeft size={24} />
+                  </button>
+                  <button
+                    onClick={() => navigateImage('next')}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 text-white bg-black/50 rounded-full p-2 hover:bg-black/70 transition-colors"
+                  >
+                    <ChevronRight size={24} />
+                  </button>
+                </>
+              )}
+
+              {/* Image */}
+              <div className="relative w-full h-full max-w-full max-h-full">
+                <Image
+                  src={project.gallery[selectedImage]}
+                  alt={`${project.title} gallery image ${selectedImage + 1}`}
+                  fill
+                  style={{ objectFit: 'contain' }}
+                  className="rounded-lg"
+                />
+              </div>
+
+              {/* Image Counter */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white bg-black/50 px-3 py-1 rounded-full text-sm">
+                {selectedImage + 1} / {project.gallery.length}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

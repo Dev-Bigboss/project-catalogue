@@ -57,8 +57,8 @@ export default function Header() {
             <Image 
             src="/Logo.png"
             alt="Project Catalogue Logo"
-            width={150}
-            height={50}
+            width={200}
+            height={70}
             className="h-10 w-auto"
             />
           </motion.div>
@@ -70,7 +70,7 @@ export default function Header() {
                 <motion.button
                   key={item.name}
                   onClick={() => handleNavClick(item.href)}
-                  className="text-white hover:text-gold transition-colors duration-300 font-medium"
+                  className="text-yellow-400 hover:text-black hover:bg-yellow-400 transition-colors duration-300 font-medium cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: -20 }}

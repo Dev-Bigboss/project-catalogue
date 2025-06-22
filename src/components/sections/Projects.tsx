@@ -406,7 +406,7 @@ export default function Projects() {
           </motion.div>
 
           {/* View All Projects Button */}
-          <motion.div
+          {/* <motion.div
             className="text-center mt-16"
             variants={itemVariants}
           >
@@ -417,7 +417,7 @@ export default function Projects() {
             >
               View All Projects
             </motion.button>
-          </motion.div>
+          </motion.div> */}
         </motion.div>
       </div>
     </section>
