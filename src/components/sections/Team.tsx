@@ -60,7 +60,7 @@ export default function Team() {
       description: 'M.Arch, ARCON - Certified Architect and Project Manager with 11+ years of experience in real estate development.',
       expertise: ['Architectural Design', 'Project Management', 'Urban Planning', 'Construction Oversight'],
       icon: Briefcase,
-      gradient: 'from-blue-600 to-purple-600'
+      gradient: 'from-yellow-400 to-yellow-600'
     },
     {
       name: 'Abiodun Okunola',
@@ -68,7 +68,7 @@ export default function Team() {
       description: 'Building Technology graduate with MBA, extensive experience in construction management and business finance.',
       expertise: ['Construction Tech', 'Financial Management', 'Operations', 'Business Strategy'],
       icon: Star,
-      gradient: 'from-green-600 to-teal-600'
+      gradient: 'from-yellow-400 to-yellow-600'
     }
   ]
 

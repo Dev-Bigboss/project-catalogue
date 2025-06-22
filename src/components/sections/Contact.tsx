@@ -102,19 +102,19 @@ export default function Contact() {
       icon: Mail,
       title: 'Email Us',
       details: 'info@projectcatalogueltd.com',
-      gradient: 'from-blue-500 to-cyan-500'
+      gradient: 'from-yellow-400 to-yellow-600'
     },
     {
       icon: Phone,
       title: 'Call Us',
       details: '+234 903 626 2519',
-      gradient: 'from-green-500 to-emerald-500'
+      gradient: 'from-yellow-400 to-yellow-600'
     },
     {
       icon: MapPin,
       title: 'Visit Us',
       details: '3A, Faramobi Ajike Street, Anthony Village, Maryland, Lagos',
-      gradient: 'from-purple-500 to-pink-500'
+      gradient: 'from-yellow-400 to-yellow-600'
     }
   ]
 
