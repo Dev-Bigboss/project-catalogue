@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, easeInOut } from 'framer-motion'
 import { ReactNode, useRef } from 'react'
 
 interface AnimatedSectionProps {
@@ -32,7 +32,7 @@ export default function AnimatedSection({
       transition: {
         duration,
         delay,
-        ease: [0.6, -0.05, 0.01, 0.99],
+        ease: easeInOut,
       },
     },
   }

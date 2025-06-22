@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'Home', href: '#home' },
@@ -53,9 +54,13 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <h1 className="text-2xl font-bold gradient-text cursor-default">
-              PCL
-            </h1>
+            <Image 
+            src="/Logo.png"
+            alt="Project Catalogue Logo"
+            width={150}
+            height={50}
+            className="h-10 w-auto"
+            />
           </motion.div>
 
           {/* Desktop Navigation */}

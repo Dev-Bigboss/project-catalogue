@@ -43,10 +43,10 @@ const projects = [
       'Generous outdoor space',
       'Communal living areas',
     ],
-    gallery: [
-      '/image2-1.jpg',
-      '/image2-2.jpg',
-      '/image2-3.jpg',
+     gallery: [
+      '/abimb1.jpg',
+      '/abimb2.jpg',
+      '/abimb3.jpg',
     ],
   },
   {
@@ -68,10 +68,10 @@ const projects = [
       'Fully fitted kitchen',
       'Modern-style architecture',
     ],
-    gallery: [
-      '/image3-1.jpg',
-      '/image3-2.jpg',
-      '/image3-3.jpg',
+     gallery: [
+      '/abimb1.jpg',
+      '/abimb2.jpg',
+      '/abimb3.jpg',
     ],
   },
   {
@@ -94,9 +94,9 @@ const projects = [
       'Individual compound and gatehouse',
     ],
     gallery: [
-      '/image4-1.jpg',
-      '/image4-2.jpg',
-      '/image4-3.jpg',
+      '/abimb1.jpg',
+      '/abimb2.jpg',
+      '/abimb3.jpg',
     ],
   },
   {
@@ -142,10 +142,10 @@ const projects = [
       'Outdoor recreation area',
       'High-speed internet and CCTV surveillance',
     ],
-    gallery: [
-      '/image6-1.jpg',
-      '/image6-2.jpg',
-      '/image6-3.jpg',
+     gallery: [
+      '/abimb1.jpg',
+      '/abimb2.jpg',
+      '/abimb3.jpg',
     ],
   },
   {
@@ -167,9 +167,9 @@ const projects = [
       'High-speed internet and CCTV surveillance',
     ],
     gallery: [
-      '/image7-1.jpg',
-      '/image7-2.jpg',
-      '/image7-3.jpg',
+      '/abimb1.jpg',
+      '/abimb2.jpg',
+      '/abimb3.jpg',
     ],
   },
 ];
