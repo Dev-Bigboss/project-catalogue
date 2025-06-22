@@ -174,17 +174,28 @@ const projects = [
   },
 ];
 
-
-export default function ProjectDetail({ params }: { params: { id: string } }) {
+export default function ProjectDetail({ params }: { params: Promise<{ id: string }> }) {
 
    const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [projectId, setProjectId] = useState<string | null>(null);
   const ref = useRef(null);
 
 useEffect(() => {
+  const resolveParams = async () => {
+    const resolvedParams = await params;
+    setProjectId(resolvedParams.id);
+  };
+  
+  resolveParams();
+}, [params]);
+
+useEffect(() => {
+  if (!projectId) return;
+  
   const foundProject = projects.find(
-    (p) => p.id === parseInt(params.id)
+    (p) => p.id === parseInt(projectId)
   );
 
   if (!foundProject) {
@@ -194,7 +205,7 @@ useEffect(() => {
 
   setProject(foundProject);
   setIsLoading(false);
-}, [params.id]);
+}, [projectId]);
 
 // Handle keyboard navigation for modal
 useEffect(() => {
