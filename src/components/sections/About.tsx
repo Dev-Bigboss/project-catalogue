@@ -147,11 +147,11 @@ export default function About() {
                     animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                     transition={{ duration: 2, delay: 0.5 }}
                   >
-                    50+
+                    20+
                   </motion.span>
                 </motion.div>
                 <div className="text-gray-600 font-medium group-hover:text-gold transition-colors duration-300">
-                  Projects Completed
+                  Project Units
                 </div>
               </motion.div>
 

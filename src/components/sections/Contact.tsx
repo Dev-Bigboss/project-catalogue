@@ -140,7 +140,7 @@ export default function Contact() {
               whileHover={{ scale: 1.02 }}
               transition={{ type: 'spring', stiffness: 300 }}
             >
-              Let&apos;s Build Your{' '}
+              Let&apos;s Develop Your{' '}
               <motion.span
                 className="text-gray-800 inline-block"
                 whileHover={{ rotateY: 10 }}

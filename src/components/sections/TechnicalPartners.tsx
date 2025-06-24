@@ -48,22 +48,7 @@ export default function TechnicalPartners() {
         'Clickatell office, Wings Building, Ozumba Mbadiwe Avenue, Victoria Island, Lagos.',
       ],
     },
-    {
-      name: 'Green Builders',
-      description: 'A world-class Sub-Saharan African construction company with over 10 years of experience, crafting historical edifices like the Madina Towers in Lagos.',
-      projects: [
-        'Construction of Alice Court I, II & III at Gbagada, Lagos.',
-        'Construction of Zylus Court Phase I, Zylus Homes & Properties, Lekki.',
-      ],
-    },
-    {
-      name: 'Stretches Contracting Limited',
-      description: 'A fast-growing building and civil engineering contracting firm, delivering unparalleled expertise in construction and infrastructure since 2016.',
-      projects: [
-        'Civil works at Pinnock Beach Estate, Lekki Phase 1, Lagos.',
-        'Civil works and contracting, Vintage Park Estate, Ikate, Lekki, Lagos.',
-      ],
-    },
+   
     {
       name: 'Ethan Cole Limited',
       description: 'An interior design company specializing in top-notch finishing and fittings for residential and commercial developments worldwide.',
@@ -103,7 +88,7 @@ export default function TechnicalPartners() {
             Our <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">Technical Partners</span>
           </motion.h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {partners.map((partner, index) => (
               <motion.div
                 key={index}
