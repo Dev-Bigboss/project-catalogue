@@ -2,8 +2,6 @@
 
 import {
   motion,
-  useScroll,
-  useTransform,
   easeInOut,
   AnimatePresence,
 } from "framer-motion";
@@ -11,9 +9,7 @@ import {
 import { useState, useEffect } from "react";
 
 export default function Hero() {
-  const { scrollY } = useScroll();
   // const y1 = useTransform(scrollY, [0, 300], [0, 100]);
-  const y2 = useTransform(scrollY, [0, 300], [0, -100]);
 
   // Slideshow state
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -23,7 +19,6 @@ export default function Hero() {
     "/image3.jpg",
     "/image4.jpg",
     "/image5.jpg",
-    // "/image6.jpg",
   ];
 
   // Auto-advance slideshow
