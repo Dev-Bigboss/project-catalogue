@@ -175,7 +175,7 @@ const projects = [
     location: 'Sawyerr Close, Anthony, Lagos.',
     description: ' 4 Bedroom Duplex and 3 Bedroom Terrace + BQ.',
     image: '/abimb1.jpg',
-    category: 'Mordern Residential',
+    category: 'Modern Residential',
     status: 'Coming soon',
     gradient: 'from-gray-700 via-gray-800 to-black',
     delay: 1.0,
