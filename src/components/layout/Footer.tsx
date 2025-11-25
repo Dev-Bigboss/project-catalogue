@@ -149,7 +149,7 @@ export default function Footer() {
                   whileHover={{ scale: 1.02 }}
                 >
                   <div className="w-5 h-5 bg-yellow-400 rounded-full flex-shrink-0 mt-1"></div>
-                  <p className="text-gray-300 text-sm">
+                  <p className="text-gray-300 text-sm text-left">
                     3A, Faramobi Ajike Street, Anthony Village, Maryland, Lagos
                   </p>
                 </motion.div>
@@ -188,7 +188,7 @@ export default function Footer() {
               className="text-gray-500 text-sm"
               whileHover={{ color: "#9CA3AF" }}
             >
-              © 2024 Project Catalogue Limited. All rights reserved. | RC:
+              © 2025 Project Catalogue Limited. All rights reserved. | RC:
               1508332
             </motion.p>
 
